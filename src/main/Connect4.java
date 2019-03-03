@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Connect4
 {
 	Scanner in = new Scanner(System.in);
-	public int[][] options = new int[5][6];
+	public int[][] options = new int[6][7];
 	
 	public Connect4()
 	{
@@ -76,17 +76,84 @@ public class Connect4
 	
 	public boolean checkWin()
 	{
-		for(int x = 1; x < 6; x++)
+		for(int x = 0; x < 6; x++)
 		{
-			for(int y = 1; y < 7; y++)
+			for(int y = 0; y < 7; y++)
 			{
-				if(options[x][y] == 1)
+				if(options[x][y] != 0)
 				{
+					vertical(x, y);
 					
+					if(vertical(x, y) == 4)
+					{
+						System.out.println("Winner!");
+						return true;
+					}
+					
+					horizontal(x, y);
+					
+					if(horizontal(x, y) == 4)
+					{
+						System.out.println("Winner!");
+						return true;
+					}
 				}
+				
+//				 Checks Diagonally
+//				System.out.println(x + " " + y + " == " + options[x][y]);
 			}
 		}
 		
-		return 0;
+		return false;
+	}
+	
+	public int vertical(int x, int y)
+	{
+		int ctr = 0;
+		
+		for(int a = 6; a >= 0; a--)
+		{
+				if(options[x][a] != 0)
+				{
+					ctr++;
+					
+					if(ctr == 4)
+					{
+						return ctr;
+					}
+				}
+
+				else
+				{
+					ctr = 0;
+				}
+		}
+
+		return ctr;
+	}
+	
+	public int horizontal(int x, int y)
+	{
+		int ctr = 0;
+		
+		for(int b = 5; b >= 0; b--)
+		{
+				if(options[b][y] != 0)
+				{
+					ctr++;
+					
+					if(ctr == 4)
+					{
+						return ctr;
+					}
+				}
+
+				else
+				{
+					ctr = 0;
+				}
+		}
+		
+		return ctr;
 	}
 }
