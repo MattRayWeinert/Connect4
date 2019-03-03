@@ -36,9 +36,9 @@ public class Connect4
 
 		if(col < 7 && col > 0)
 		{
-			if(isFull(col) == 1 && 0 <= col && col < 7)
+			if(isFull(--col) == 1)
 			{
-				drop(--col);
+				drop(col);
 			}
 
 		}
