@@ -36,11 +36,29 @@ public class Connect4
 
 		if(col < 7 && col > 0)
 		{
-			if(isFull(--col) == 1)
+			if(isFull(--col) != 0)
 			{
 				drop(col);
 			}
+		}
+		
+		else
+		{
+			System.out.println("*** Try picking a valid column.");
+		}
+	}
+	
+	public void userInput2()
+	{
+		System.out.println("*** Please pick a column");
+		int col2 = in.nextInt();
 
+		if(col2 < 7 && col2 > 0)
+		{
+			if(isFull(--col2) == 1)
+			{
+				drop2(col2);
+			}
 		}
 		
 		else
@@ -52,7 +70,7 @@ public class Connect4
 	// Checks if the column is full by checking top row of chosen column
 	public int isFull(int col)
 	{		
-		if(options[col][0] == 1)
+		if(options[col][0] != 0 )
 			return 0;
 		else
 			return 1;
@@ -71,7 +89,22 @@ public class Connect4
 		
 		// Places marker in the 2D array
 		options[col][row] = 1;
-				
+	}
+	
+	// Drops the token into the bottom of the column
+	public void drop2(int col2)
+	{
+		int row = 0;
+		
+		// Finds the open bottom-most space in the column
+		while(row < 6 && options[col2][row + 1] == 0)
+		{
+			row++;
+		}
+		
+		// Places marker in the 2D array
+		options[col2][row] = 2;
+		System.out.println(options[col2][row]);
 	}
 	
 	public boolean checkWin()
@@ -109,51 +142,73 @@ public class Connect4
 	
 	public int vertical(int x, int y)
 	{
-		int ctr = 0;
+		int ctr1 = 0, ctr2 = 0;
 		
 		for(int a = 6; a >= 0; a--)
 		{
-				if(options[x][a] != 0)
+				if(options[x][a] == 1)
 				{
-					ctr++;
+					ctr1++;
 					
-					if(ctr == 4)
+					if(ctr1 == 4)
 					{
-						return ctr;
+						return ctr1;
+					}
+				}
+				
+				else if(options[x][a] == 2)
+				{
+					ctr2++;
+					
+					if(ctr2 == 4)
+					{
+						return ctr2;
 					}
 				}
 
 				else
 				{
-					ctr = 0;
+					ctr1 = 0;
+					ctr2 = 0;
 				}
 		}
 
-		return ctr;
+		return 0;
 	}
 	
 	public int horizontal(int x, int y)
 	{
-		int ctr = 0;
+		int ctr3 = 0, ctr4 = 0;
 		
 		for(int b = 5; b >= 0; b--)
 		{
-				if(options[b][y] != 0)
+			if(options[b][y] == 1)
+			{
+				ctr3++;
+				
+				if(ctr3 == 4)
 				{
-					ctr++;
-					
-					if(ctr == 4)
-					{
-						return ctr;
-					}
+					return ctr3;
 				}
+			}
+			
+			if(options[b][y] == 2)
+			{
+				ctr4++;
+				
+				if(ctr4 == 4)
+				{
+					return ctr4;
+				}
+			}
 
-				else
-				{
-					ctr = 0;
-				}
+			else
+			{
+				ctr3 = 0;
+				ctr4 = 0;
+			}
 		}
 		
-		return ctr;
+		return 0;
 	}
 }
