@@ -44,7 +44,7 @@ public class Connect4
 		
 		else
 		{
-			System.out.println("*** Try picking a valid column.");
+			System.out.println("*** Try picking a valid column!");
 		}
 	}
 	
@@ -63,7 +63,7 @@ public class Connect4
 		
 		else
 		{
-			System.out.println("*** Try picking a valid column.");
+			System.out.println("*** Try picking a valid column!");
 		}
 	}
 	
